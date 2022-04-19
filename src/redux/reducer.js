@@ -15,22 +15,27 @@ const globalState = {
         "info",
         "success",
         "success",
+        "error",
+        "secondary",
     ],
     color: "info",
     random: 0,
-    background: "",
+    background: "#0288d1",
     backgrounds: [
         "#1976d2",
         "#1976d2",
         "#9c27b0",
-        "9c27b0",
+        "#9c27b0",
         "#d32f2f",
         "#ed6c02",
         "#ed6c02",
         "#0288d1",
         "#2e7d32",
         "#2e7d32",
+        "#9c27b0",
+        "#ed6c02",
     ],
+    checked: true,
 };
 
 //Reducer
@@ -45,6 +50,7 @@ const rootReducer = (state = globalState, action) => {
                 author: state.quotes[random].author,
                 color: state.colors[Math.round(random / 10)],
                 background: state.backgrounds[Math.round(random / 10)],
+                checked: !state.checked,
             };
         default:
             return state;
@@ -60,6 +66,7 @@ const getQuote = async(state) => {
             console.log("Error: ", err);
         });
     const newQuotes = quotes.data.quotes;
+    state.checked = false;
     newQuotes.map((item) => {
         return state.quotes.push(item);
     });
