@@ -35,26 +35,6 @@ const globalState = {
         "#9c27b0",
         "#ed6c02",
     ],
-    checked: true,
-};
-
-//Reducer
-const rootReducer = (state = globalState, action) => {
-    switch (action.type) {
-        case "NEW_QUOTE":
-            const random = Math.round(Math.random() * 100);
-            console.log(state);
-            return {
-                ...state,
-                quote: state.quotes[random].quote,
-                author: state.quotes[random].author,
-                color: state.colors[Math.round(random / 10)],
-                background: state.backgrounds[Math.round(random / 10)],
-                checked: !state.checked,
-            };
-        default:
-            return state;
-    }
 };
 
 const getQuote = async(state) => {
@@ -73,5 +53,22 @@ const getQuote = async(state) => {
 };
 
 getQuote(globalState);
+
+//Reducer
+const rootReducer = (state = globalState, action) => {
+    switch (action.type) {
+        case "NEW_QUOTE":
+            const random = Math.round(Math.random() * 100);
+            return {
+                ...state,
+                quote: state.quotes[random].quote,
+                author: state.quotes[random].author,
+                color: state.colors[Math.round(random / 10)],
+                background: state.backgrounds[Math.round(random / 10)],
+            };
+        default:
+            return state;
+    }
+};
 
 export default rootReducer;
